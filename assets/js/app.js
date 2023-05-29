@@ -9,6 +9,38 @@ async function getYGOCardFromAPI(string) {
     }
 }
 
+async function displayYGOCard(inputs) {
+    console.log(inputs.type, inputs.data);
+    let string;
+    if (inputs.type === 'monster') {
+        string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
+    } else if (inputs.type === 'spell') {
+        string = `type=spell%20card&race=${inputs.data[0]}`;
+    } else if (inputs.type === 'trap') {
+        string = `type=trap%20card&race=${inputs.data[0]}`;
+    }
+    const card = await getYGOCardFromAPI(string);
+
+    console.log(card);
+    const cardImageDiv = document.getElementById('card');
+    const cardImage = document.createElement('img');
+    cardImage.src = card.card_images[0].image_url;
+    
+    const cardDescriptionDiv = document.getElementById('description');
+    const cardDescription = document.createElement('p');
+    cardDescription.textContent = card.desc;
+
+    cardImageDiv.append(cardImage);
+    cardDescriptionDiv.append(cardDescription);
+}
+
+function cleanElementById(id) {
+    const div = document.getElementById(id);
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
+
 function generateMonsterCardDOM() {
 
     const monsterLevelSelect = document.createElement('select');
@@ -54,16 +86,19 @@ function generateMonsterCardDOM() {
     getCardButton.textContent = 'Get Card';
 
     getCardButton.addEventListener('click', () => {
-        cleanDOM('card');
+        cleanElementById('card');
+        cleanElementById('description');
         displayYGOCard({type: 'monster', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]})
     });
 
-    cleanDOM('inputs');
-    cleanDOM('card');
+    cleanElementById('inputs');
+    cleanElementById('card');
+    cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
     inputsDiv.append(monsterLevelSelect, monsterTypeSelect, monsterRaceSelect, monsterAttributeSelect, getCardButton);
 }
+
 function generateSpellCardDOM() {
     const spellRaceSelect = document.createElement('select');
     const races = ['Normal', 'Continuous', 'Equip', 'Field', 'Quick-Play', 'Ritual'];
@@ -79,16 +114,19 @@ function generateSpellCardDOM() {
     getCardButton.textContent = 'Get Card';
 
     getCardButton.addEventListener('click', () => {
-        cleanDOM('card');
+        cleanElementById('card');
+        cleanElementById('description');
         displayYGOCard({type: 'spell', data: [spellRaceSelect.value]})
     });
-
-    cleanDOM('inputs');
-    cleanDOM('card');
+    
+    cleanElementById('inputs');
+    cleanElementById('card');
+    cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
     inputsDiv.append(spellRaceSelect, getCardButton);
 }
+
 function generateTrapCardDOM() {
     const trapRaceSelect = document.createElement('select');
     const races = ['Normal', 'Continuous', 'Counter'];
@@ -104,35 +142,15 @@ function generateTrapCardDOM() {
     getCardButton.textContent = 'Get Card';
 
     getCardButton.addEventListener('click', () => {
-        cleanDOM('card');
+        cleanElementById('card');
+        cleanElementById('description');
         displayYGOCard({type: 'trap', data: [trapRaceSelect.value]})
     });
-    cleanDOM('inputs');
-    cleanDOM('card');
+
+    cleanElementById('inputs');
+    cleanElementById('card');
+    cleanElementById('description');
+
     const inputsDiv = document.getElementById('inputs');
     inputsDiv.append(trapRaceSelect, getCardButton);
-}
-async function displayYGOCard(inputs) {
-    console.log(inputs.type, inputs.data);
-    let string;
-    if (inputs.type === 'monster') {
-        string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
-    } else if (inputs.type === 'spell') {
-        string = `type=spell%20card&race=${inputs.data[0]}`;
-    } else if (inputs.type === 'trap') {
-        string = `type=trap%20card&race=${inputs.data[0]}`;
-    }
-    const card = await getYGOCardFromAPI(string);
-    console.log(card);
-    const cardDiv = document.getElementById('card');
-    const cardImage = document.createElement('img');
-    cardImage.src = card.card_images[0].image_url;
-
-    cardDiv.append(cardImage);
-}
-function cleanDOM(id) {
-    const div = document.getElementById(id);
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
 }
