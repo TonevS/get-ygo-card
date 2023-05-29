@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+}
+header {
+    flex-basis: 20vw;
+    background-color: bisque;
+}
+main {
+    background-color: aquamarine;
+    flex-grow: 1;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}
+nav button {
+    padding: 1rem;
+    color: black;
+    width: calc(100% - 5em);
+    font-size: 2rem;
+    
+}
+button:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "get-ygo-card",
+  "version": "1.0.0",
+  "description": "Get Yu-Gi-Oh card based on parameters set by user input",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonevS/get-ygo-card.git"
+  },
+  "author": "TonevS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TonevS/get-ygo-card/issues"
+  },
+  "homepage": "https://github.com/TonevS/get-ygo-card#readme"
+}
