@@ -8,23 +8,6 @@ async function getYGOCardFromAPI(string) {
         console.log(error);
     }
 }
-// async function getYGOArchetypesFromAPI() {
-//     try {
-//         const response = await fetch("https://db.ygoprodeck.com/api/v7/archetypes.php");
-//         const archetypes = await response.json();
-//         return archetypes;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-// const monsterArchetypeSelect = document.createElement('select');
-// options = [];
-// for (let i = 0; i < archetypes.length; i++) {
-//     options.push(document.createElement('option'));
-//     options[i].innerHTML = archetypes[i].archetype_name;
-//     options[i].value = archetypes[i].archetype_name;
-//     monsterArchetypeSelect.append(options[i]);
-// }
 
 function generateMonsterCardDOM() {
 
