@@ -12,13 +12,27 @@ async function getYGOCardFromAPI(string) {
 async function displayYGOCard(inputs) {
     console.log(inputs.type, inputs.data);
     let string;
-    if (inputs.type === 'monster') {
-        string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
+    
+    if (inputs.type.includes('monster')) {
+        switch (inputs.type) {
+            case 'monster':
+                string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
+                break;
+            case 'monsterPendulum':
+                string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}&scale=${inputs.data[4]}`;
+                break;
+            case 'monsterLink':
+                string = `link=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
+                break;
+            default:
+                break;
+        }
     } else if (inputs.type === 'spell') {
         string = `type=spell%20card&race=${inputs.data[0]}`;
     } else if (inputs.type === 'trap') {
         string = `type=trap%20card&race=${inputs.data[0]}`;
     }
+    console.log(string);
     const card = await getYGOCardFromAPI(string);
 
     console.log(card);
@@ -62,6 +76,22 @@ function generateMonsterCardDOM() {
         monsterTypeSelect.append(options[i]);
     }
 
+    monsterTypeSelect.addEventListener('change', () => {
+        if (monsterTypeSelect.value === 'Link Monster') {
+            monsterLevelSelect.disabled = true;
+            monsterPenScaleSelect.disabled = true;
+            monsterLinkRatingSelect.disabled = false;
+        } else {
+            if (monsterTypeSelect.value.includes('Pendulum')) {
+                monsterPenScaleSelect.disabled = false;
+            } else {
+                monsterPenScaleSelect.disabled = true;
+            }
+            monsterLevelSelect.disabled = false;
+            monsterLinkRatingSelect.disabled = true;
+        }
+    });
+
     const monsterRaceSelect = document.createElement('select');
     const races = ['Aqua', 'Beast', 'Beast-Warrior', 'Creator-God', 'Cyberse', 'Dinosaur', 'Divine-Beast', 'Dragon', 'Fairy', 'Fiend', 'Fish', 'Insect', 'Machine', 'Plant', 'Psychic', 'Pyro', 'Reptile', 'Rock', 'Sea Serpent', 'Spellcaster', 'Thunder', 'Warrior', 'Winged Beast', 'Wyrm', 'Zombie'];
     options = [];
@@ -82,13 +112,42 @@ function generateMonsterCardDOM() {
         monsterAttributeSelect.append(options[i]);
     }
 
+    const monsterLinkRatingSelect = document.createElement('select');
+    options = [];
+    for (let i = 0; i < 6; i++) {
+        options.push(document.createElement('option'));
+        options[i].innerHTML = i + 1;
+        options[i].value = i + 1;
+        monsterLinkRatingSelect.append(options[i]);
+    }
+    monsterLinkRatingSelect.disabled = true;
+
+    const monsterPenScaleSelect = document.createElement('select');
+    options = [];
+    for (let i = 0; i < 14; i++) {
+        options.push(document.createElement('option'));
+        options[i].innerHTML = i;
+        options[i].value = i;
+        monsterPenScaleSelect.append(options[i]);
+    }
+    monsterPenScaleSelect.disabled = true;
+
+
+
+
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
 
     getCardButton.addEventListener('click', () => {
         cleanElementById('card');
         cleanElementById('description');
-        displayYGOCard({type: 'monster', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]})
+        if (monsterTypeSelect.value === 'Link Monster') {
+            displayYGOCard({type: 'monsterLink', data: [monsterLinkRatingSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]});
+        } else if (monsterTypeSelect.value.includes('Pendulum')) {
+            displayYGOCard({type: 'monsterPendulum', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value, monsterPenScaleSelect.value]});
+        } else {
+            displayYGOCard({type: 'monster', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]})
+        }
     });
 
     cleanElementById('inputs');
@@ -96,7 +155,7 @@ function generateMonsterCardDOM() {
     cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
-    inputsDiv.append(monsterLevelSelect, monsterTypeSelect, monsterRaceSelect, monsterAttributeSelect, getCardButton);
+    inputsDiv.append(monsterTypeSelect, monsterRaceSelect, monsterAttributeSelect, monsterLevelSelect, monsterPenScaleSelect, monsterLinkRatingSelect, getCardButton);
 }
 
 function generateSpellCardDOM() {
