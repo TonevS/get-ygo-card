@@ -53,16 +53,15 @@ function generateMonsterCardDOM() {
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
 
-    getCardButton.addEventListener('click', () => displayYGOCard({type: 'monster', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]}));
+    getCardButton.addEventListener('click', () => {
+        cleanDOM('card');
+        displayYGOCard({type: 'monster', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]})
+    });
+
+    cleanDOM('inputs');
+    cleanDOM('card');
 
     const inputsDiv = document.getElementById('inputs');
-    while (inputsDiv.firstChild) {
-        inputsDiv.removeChild(inputsDiv.firstChild);
-    }
-    const cardDiv = document.getElementById('card');
-    while (cardDiv.firstChild) {
-        cardDiv.removeChild(cardDiv.firstChild);
-    }
     inputsDiv.append(monsterLevelSelect, monsterTypeSelect, monsterRaceSelect, monsterAttributeSelect, getCardButton);
 }
 function generateSpellCardDOM() {
@@ -79,17 +78,39 @@ function generateSpellCardDOM() {
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
 
-    getCardButton.addEventListener('click', () => displayYGOCard({type: 'spell', data: [spellRaceSelect.value]}));
+    getCardButton.addEventListener('click', () => {
+        cleanDOM('card');
+        displayYGOCard({type: 'spell', data: [spellRaceSelect.value]})
+    });
+
+    cleanDOM('inputs');
+    cleanDOM('card');
 
     const inputsDiv = document.getElementById('inputs');
-    while (inputsDiv.firstChild) {
-        inputsDiv.removeChild(inputsDiv.firstChild);
-    }
-    const cardDiv = document.getElementById('card');
-    while (cardDiv.firstChild) {
-        cardDiv.removeChild(cardDiv.firstChild);
-    }
     inputsDiv.append(spellRaceSelect, getCardButton);
+}
+function generateTrapCardDOM() {
+    const trapRaceSelect = document.createElement('select');
+    const races = ['Normal', 'Continuous', 'Counter'];
+    options = [];
+    for (let i = 0; i < races.length; i++) {
+        options.push(document.createElement('option'));
+        options[i].innerHTML = races[i];
+        options[i].value = races[i];
+        trapRaceSelect.append(options[i]);
+    }
+
+    const getCardButton = document.createElement('button');
+    getCardButton.textContent = 'Get Card';
+
+    getCardButton.addEventListener('click', () => {
+        cleanDOM('card');
+        displayYGOCard({type: 'trap', data: [trapRaceSelect.value]})
+    });
+    cleanDOM('inputs');
+    cleanDOM('card');
+    const inputsDiv = document.getElementById('inputs');
+    inputsDiv.append(trapRaceSelect, getCardButton);
 }
 async function displayYGOCard(inputs) {
     console.log(inputs.type, inputs.data);
@@ -99,7 +120,7 @@ async function displayYGOCard(inputs) {
     } else if (inputs.type === 'spell') {
         string = `type=spell%20card&race=${inputs.data[0]}`;
     } else if (inputs.type === 'trap') {
-
+        string = `type=trap%20card&race=${inputs.data[0]}`;
     }
     const card = await getYGOCardFromAPI(string);
     console.log(card);
@@ -108,4 +129,10 @@ async function displayYGOCard(inputs) {
     cardImage.src = card.card_images[0].image_url;
 
     cardDiv.append(cardImage);
+}
+function cleanDOM(id) {
+    const div = document.getElementById(id);
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
 }
