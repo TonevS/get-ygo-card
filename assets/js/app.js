@@ -1,6 +1,6 @@
-async function getYGOCardFromAPI(type) {
+async function getYGOCardFromAPI(level, type, race, attribute) {
     try {
-        const response = await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?type=${type}`);
+        const response = await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?level=${level}&type=${type}&race=${race}&attribute=${attribute}`);
         const jsonData = await response.json();
         const card = jsonData.data[Math.floor(Math.random() * jsonData.data.length)];
         return card;
@@ -70,15 +70,15 @@ function generateMonsterCardDOM() {
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
 
-    getCardButton.addEventListener('click', () => displayYGOCard('Normal Monster'));
+    getCardButton.addEventListener('click', () => displayYGOCard(monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value));
 
     const inputsDiv = document.getElementById('inputs');
     inputsDiv.append(monsterLevelSelect, monsterTypeSelect, monsterRaceSelect, monsterAttributeSelect, getCardButton);
 }
 
-async function displayYGOCard(type) {
-    console.log(type);
-    const card = await getYGOCardFromAPI(type);
+async function displayYGOCard(level, type, race, attribute) {
+    console.log(level, type, race, attribute);
+    const card = await getYGOCardFromAPI(level, type, race, attribute);
     console.log(card);
     const cardDiv = document.getElementById('card');
     const cardImage = document.createElement('img');
