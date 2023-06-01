@@ -58,23 +58,11 @@ function cleanElementById(id) {
 function generateMonsterCardDOM() {
 
     const monsterLevelSelect = document.createElement('select');
-    let options = [];
-    for (let i = 0; i < 12; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = i + 1;
-        options[i].value = i + 1;
-        monsterLevelSelect.append(options[i]);
-    }
+    fillOptionsWithLength(monsterLevelSelect, 13, 1);
 
     const monsterTypeSelect = document.createElement('select');
     const types = ['Effect Monster', 'Flip Effect Monster', 'Flip Tuner Effect Monster', 'Gemini Monster', 'Normal Monster', 'Normal Tuner Monster', 'Pendulum Effect Monster', 'Pendulum Flip Effect Monster', 'Pendulum Normal Monster', 'Pendulum Tuner Effect Monster', 'Ritual Effect Monster', 'Ritual Monster', 'Spirit Monster', 'Toon Monster', 'Tuner Monster', 'Union Effect Monster', "Fusion Monster", 'Link Monster', 'Pendulum Effect Fusion Monster', 'Synchro Monster', 'Synchro Pendulum Effect Monster', 'Synchro Tuner Monster', 'XYZ Monster', 'XYZ Pendulum Effect Monster'];
-    options = [];
-    for (let i = 0; i < types.length; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = types[i];
-        options[i].value = types[i];
-        monsterTypeSelect.append(options[i]);
-    }
+    fillOptionsWithArray(monsterTypeSelect, types);
 
     monsterTypeSelect.addEventListener('change', () => {
         if (monsterTypeSelect.value === 'Link Monster') {
@@ -94,46 +82,20 @@ function generateMonsterCardDOM() {
 
     const monsterRaceSelect = document.createElement('select');
     const races = ['Aqua', 'Beast', 'Beast-Warrior', 'Creator-God', 'Cyberse', 'Dinosaur', 'Divine-Beast', 'Dragon', 'Fairy', 'Fiend', 'Fish', 'Insect', 'Machine', 'Plant', 'Psychic', 'Pyro', 'Reptile', 'Rock', 'Sea Serpent', 'Spellcaster', 'Thunder', 'Warrior', 'Winged Beast', 'Wyrm', 'Zombie'];
-    options = [];
-    for (let i = 0; i < races.length; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = races[i];
-        options[i].value = races[i];
-        monsterRaceSelect.append(options[i]);
-    }
+    fillOptionsWithArray(monsterRaceSelect, races);
 
     const monsterAttributeSelect = document.createElement('select');
     const attributes = ['DARK', 'DIVINE', 'EARTH', 'FIRE', 'LIGHT', 'WATER', 'WIND'];
-    options = [];
-    for (let i = 0; i < attributes.length; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = attributes[i];
-        options[i].value = attributes[i];
-        monsterAttributeSelect.append(options[i]);
-    }
+    fillOptionsWithArray(monsterAttributeSelect, attributes);
+
 
     const monsterLinkRatingSelect = document.createElement('select');
-    options = [];
-    for (let i = 0; i < 6; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = i + 1;
-        options[i].value = i + 1;
-        monsterLinkRatingSelect.append(options[i]);
-    }
+    fillOptionsWithLength(monsterLinkRatingSelect, 7, 1);
     monsterLinkRatingSelect.disabled = true;
 
     const monsterPenScaleSelect = document.createElement('select');
-    options = [];
-    for (let i = 0; i < 14; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = i;
-        options[i].value = i;
-        monsterPenScaleSelect.append(options[i]);
-    }
+    fillOptionsWithLength(monsterPenScaleSelect, 14);
     monsterPenScaleSelect.disabled = true;
-
-
-
 
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
@@ -161,13 +123,7 @@ function generateMonsterCardDOM() {
 function generateSpellCardDOM() {
     const spellRaceSelect = document.createElement('select');
     const races = ['Normal', 'Continuous', 'Equip', 'Field', 'Quick-Play', 'Ritual'];
-    options = [];
-    for (let i = 0; i < races.length; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = races[i];
-        options[i].value = races[i];
-        spellRaceSelect.append(options[i]);
-    }
+    fillOptionsWithArray(spellRaceSelect, races);
 
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
@@ -189,13 +145,7 @@ function generateSpellCardDOM() {
 function generateTrapCardDOM() {
     const trapRaceSelect = document.createElement('select');
     const races = ['Normal', 'Continuous', 'Counter'];
-    options = [];
-    for (let i = 0; i < races.length; i++) {
-        options.push(document.createElement('option'));
-        options[i].innerHTML = races[i];
-        options[i].value = races[i];
-        trapRaceSelect.append(options[i]);
-    }
+    fillOptionsWithArray(trapRaceSelect, races);
 
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
@@ -212,4 +162,22 @@ function generateTrapCardDOM() {
 
     const inputsDiv = document.getElementById('inputs');
     inputsDiv.append(trapRaceSelect, getCardButton);
+}
+
+function fillOptionsWithLength(select, length, i = 0) {
+    for (;i < length; i++) {
+        const option = document.createElement('option');
+        option.innerHTML = i;
+        option.value = i;
+        select.append(option);
+    }
+}
+
+function fillOptionsWithArray(select, array) {
+    for (let i = 0; i < array.length; i++) {
+        const option = document.createElement('option');
+        option.innerHTML = array[i];
+        option.value = array[i];
+        select.append(option);
+    }
 }
