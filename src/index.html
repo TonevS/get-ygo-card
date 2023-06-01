@@ -7,22 +7,22 @@
     <title>Get YGO Card</title>
     <link rel="stylesheet" href="/dist/output.css">
 </head>
-<body class="flex h-screen">
-    <header class="w-1/4">
+<body class="h-screen">
+    <header class="flex-center w-1/4 float-left h-full">
         <nav class="flex flex-col justify-evenly h-full">
-            <button onclick="generateMonsterCardDOM()">Monster</button>
-            <button onclick="generateSpellCardDOM()">Spell</button>
-            <button onclick="generateTrapCardDOM()">Trap</button>
+            <button class="border-orange-900/60" onclick="generateMonsterCardDOM()">Monster</button>
+            <button class="border-sky-600" onclick="generateSpellCardDOM()">Spell</button>
+            <button class="border-purple-700" onclick="generateTrapCardDOM()">Trap</button>
         </nav>
     </header>
-    <main class="flex">
-        <div id="inputs">
+    <main class="flex flex-col flex-grow h-full">
+        <div id="inputs" class="basis-1/4">
         </div>
-        <div id="results">
-            <div id="card">
+        <div id="results" class="flex-center flex-grow gap-5">
+            <div id="card" class="flex-center basis-2/5">
 
             </div>
-            <div id="description">
+            <div id="description" class="flex-center basis-2/5">
 
             </div>
         </div>
