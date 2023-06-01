@@ -1,10 +1,12 @@
 {
   "name": "get-ygo-card",
   "version": "1.0.0",
-  "description": "Get Yu-Gi-Oh card based on parameters set by user input",
+  "description": "Get a random Yu-Gi-Oh card based on parameters set by user input",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css --watch",
+    "build": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/TonevS/get-ygo-card/issues"
   },
-  "homepage": "https://github.com/TonevS/get-ygo-card#readme"
+  "homepage": "https://github.com/TonevS/get-ygo-card#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
 }

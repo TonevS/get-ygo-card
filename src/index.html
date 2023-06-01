@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get YGO Card</title>
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="/dist/output.css">
 </head>
-<body>
-    <header>
-        <nav>
+<body class="flex h-screen">
+    <header class="w-1/4">
+        <nav class="flex flex-col justify-evenly h-full">
             <button onclick="generateMonsterCardDOM()">Monster</button>
             <button onclick="generateSpellCardDOM()">Spell</button>
             <button onclick="generateTrapCardDOM()">Trap</button>
         </nav>
     </header>
-    <main>
+    <main class="flex">
         <div id="inputs">
         </div>
         <div id="results">
@@ -28,6 +28,6 @@
         </div>
         
     </main>
-    <script src="assets/js/app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
