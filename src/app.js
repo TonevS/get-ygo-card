@@ -58,11 +58,15 @@ function cleanElementById(id) {
 function generateMonsterCardDOM() {
 
     const monsterLevelSelect = document.createElement('select');
+    monsterLevelSelect.id = 'monsterLevel';
     fillSelectWithLength(monsterLevelSelect, 13, 1);
+    const monsterLevelDiv = wrapWithLabel(monsterLevelSelect, 'Level/Rank');
 
     const monsterTypeSelect = document.createElement('select');
+    monsterTypeSelect.id = 'monsterType';
     const types = ['Effect Monster', 'Flip Effect Monster', 'Flip Tuner Effect Monster', 'Gemini Monster', 'Normal Monster', 'Normal Tuner Monster', 'Pendulum Effect Monster', 'Pendulum Flip Effect Monster', 'Pendulum Normal Monster', 'Pendulum Tuner Effect Monster', 'Ritual Effect Monster', 'Ritual Monster', 'Spirit Monster', 'Toon Monster', 'Tuner Monster', 'Union Effect Monster', "Fusion Monster", 'Link Monster', 'Pendulum Effect Fusion Monster', 'Synchro Monster', 'Synchro Pendulum Effect Monster', 'Synchro Tuner Monster', 'XYZ Monster', 'XYZ Pendulum Effect Monster'];
     fillSelectWithArray(monsterTypeSelect, types);
+
 
     monsterTypeSelect.addEventListener('change', () => {
         if (monsterTypeSelect.value === 'Link Monster') {
@@ -79,23 +83,32 @@ function generateMonsterCardDOM() {
             monsterLinkRatingSelect.disabled = true;
         }
     });
+    const monsterTypeDiv = wrapWithLabel(monsterTypeSelect, 'Type');
 
     const monsterRaceSelect = document.createElement('select');
+    monsterRaceSelect.id = 'monsterRace';
     const races = ['Aqua', 'Beast', 'Beast-Warrior', 'Creator-God', 'Cyberse', 'Dinosaur', 'Divine-Beast', 'Dragon', 'Fairy', 'Fiend', 'Fish', 'Insect', 'Machine', 'Plant', 'Psychic', 'Pyro', 'Reptile', 'Rock', 'Sea Serpent', 'Spellcaster', 'Thunder', 'Warrior', 'Winged Beast', 'Wyrm', 'Zombie'];
     fillSelectWithArray(monsterRaceSelect, races);
+    const monsterRaceDiv = wrapWithLabel(monsterRaceSelect, 'Race');
 
     const monsterAttributeSelect = document.createElement('select');
+    monsterAttributeSelect.id = 'monsterAttribute';
     const attributes = ['DARK', 'DIVINE', 'EARTH', 'FIRE', 'LIGHT', 'WATER', 'WIND'];
     fillSelectWithArray(monsterAttributeSelect, attributes);
+    const monsterAttributeDiv = wrapWithLabel(monsterAttributeSelect, 'Attribute');
 
 
     const monsterLinkRatingSelect = document.createElement('select');
+    monsterLinkRatingSelect.id = 'monsterLinkRating';
     fillSelectWithLength(monsterLinkRatingSelect, 7, 1);
     monsterLinkRatingSelect.disabled = true;
+    const monsterLinkRatingDiv = wrapWithLabel(monsterLinkRatingSelect, 'Link Rating');
 
     const monsterPenScaleSelect = document.createElement('select');
+    monsterPenScaleSelect.id = 'monsterPenScale';
     fillSelectWithLength(monsterPenScaleSelect, 14);
     monsterPenScaleSelect.disabled = true;
+    const monsterPenScaleDiv = wrapWithLabel(monsterPenScaleSelect, 'Pendulum Scale');
 
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
@@ -117,13 +130,14 @@ function generateMonsterCardDOM() {
     cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
-    inputsDiv.append(monsterTypeSelect, monsterRaceSelect, monsterAttributeSelect, monsterLevelSelect, monsterPenScaleSelect, monsterLinkRatingSelect, getCardButton);
+    inputsDiv.append(monsterTypeDiv, monsterRaceDiv, monsterAttributeDiv, monsterLevelDiv, monsterPenScaleDiv, monsterLinkRatingDiv, getCardButton);
 }
 
 function generateSpellCardDOM() {
     const spellRaceSelect = document.createElement('select');
     const races = ['Normal', 'Continuous', 'Equip', 'Field', 'Quick-Play', 'Ritual'];
     fillSelectWithArray(spellRaceSelect, races);
+    const spellRaceDiv = wrapWithLabel(spellRaceSelect, 'Type')
 
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
@@ -139,14 +153,15 @@ function generateSpellCardDOM() {
     cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
-    inputsDiv.append(spellRaceSelect, getCardButton);
+    inputsDiv.append(spellRaceDiv, getCardButton);
 }
 
 function generateTrapCardDOM() {
     const trapRaceSelect = document.createElement('select');
     const races = ['Normal', 'Continuous', 'Counter'];
     fillSelectWithArray(trapRaceSelect, races);
-
+    const trapRaceDiv = wrapWithLabel(trapRaceSelect, 'Type')
+    
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
 
@@ -161,7 +176,7 @@ function generateTrapCardDOM() {
     cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
-    inputsDiv.append(trapRaceSelect, getCardButton);
+    inputsDiv.append(trapRaceDiv, getCardButton);
 }
 
 function fillSelectWithLength(select, length, i = 0) {
@@ -181,3 +196,14 @@ function fillSelectWithArray(select, array) {
         select.append(option);
     }
 }
+
+function wrapWithLabel(element, text) {
+    const div = document.createElement('div');
+    div.className = 'group';
+    const label = document.createElement('label');
+    label.htmlFor = element.id;
+    label.textContent = text;
+    div.append(label, element);
+    return div;
+}
+

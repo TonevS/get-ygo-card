@@ -445,6 +445,21 @@ header button {
   justify-content: center;
 }
 
+select {
+  padding: 1rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.group label {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -585,12 +600,12 @@ header button {
   align-items: center;
 }
 
-.justify-center {
-  justify-content: center;
-}
-
 .justify-evenly {
   justify-content: space-evenly;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-5 {
@@ -611,8 +626,8 @@ header button {
   border-color: rgb(2 132 199 / var(--tw-border-opacity));
 }
 
-.align-middle {
-  vertical-align: middle;
+.p-4 {
+  padding: 1rem;
 }
 
 * {
