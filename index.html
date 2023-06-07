@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get YGO Card</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+<body class="h-screen">
+    <header class="flex-center w-1/4 float-left h-full bg-ygo-black">
+        <nav class="flex flex-col justify-evenly h-full">
+            <button onclick="generateMonsterCardDOM()">Monster</button>
+            <button onclick="generateSpellCardDOM()">Spell</button>
+            <button onclick="generateTrapCardDOM()">Trap</button>
+        </nav>
+    </header>
+    <main class="flex flex-col flex-grow h-full">
+        <div id="inputs" class="basis-1/4 p-4 gap-4 flex justify-evenly items-center flex-wrap bg-ygo-black/80">
+        </div>
+        <div id="results" class="flex-center flex-grow gap-5 bg-ygo-black/60">
+            <div id="card" class="flex-center basis-2/5">
+
+            </div>
+            <div id="description" class="flex-center basis-2/5">
+
+            </div>
+        </div>
+        
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
