@@ -206,4 +206,3 @@ function wrapWithLabel(element, text) {
     div.append(label, element);
     return div;
 }
-

@@ -4,24 +4,28 @@
 
 @layer base {
     header button {
-        @apply px-20 py-5 text-black text-2xl border-4;
+        @apply px-20 py-5 bg-ygo-beige text-ygo-black text-2xl border-4 border-ygo-black/50;
     }
     #description p {
-        @apply text-2xl;
+        @apply text-2xl bg-ygo-white p-2 border-4 border-ygo-black/40;
     }
     .flex-center {
         @apply flex justify-center items-center;
     }
     select {
-        @apply p-4;
+        @apply p-2 border-2 border-ygo-black/50 bg-ygo-white text-ygo-black;
+    }
+    select:disabled {
+        @apply bg-ygo-black/50;
     }
     .group {
-        @apply flex flex-col gap-1;
+        @apply flex flex-col gap-1 bg-ygo-beige text-ygo-black border-4 border-ygo-black/50 p-4;
     }
     .group label {
         @apply text-2xl;
     }
-}
-* {
-    border: 1px solid black;
+    #inputs button {
+        @apply px-6 py-4 bg-ygo-beige text-ygo-black border-4 border-ygo-black/50;
+    }
+
 }

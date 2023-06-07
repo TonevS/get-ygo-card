@@ -424,6 +424,9 @@ video {
 
 header button {
   border-width: 4px;
+  border-color: rgb(57 62 70 / 0.5);
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 231 213 / var(--tw-bg-opacity));
   padding-left: 5rem;
   padding-right: 5rem;
   padding-top: 1.25rem;
@@ -431,10 +434,15 @@ header button {
   font-size: 1.5rem;
   line-height: 2rem;
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: rgb(57 62 70 / var(--tw-text-opacity));
 }
 
 #description p {
+  border-width: 4px;
+  border-color: rgb(57 62 70 / 0.4);
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 247 247 / var(--tw-bg-opacity));
+  padding: 0.5rem;
   font-size: 1.5rem;
   line-height: 2rem;
 }
@@ -446,18 +454,48 @@ header button {
 }
 
 select {
-  padding: 1rem;
+  border-width: 2px;
+  border-color: rgb(57 62 70 / 0.5);
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 247 247 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(57 62 70 / var(--tw-text-opacity));
+}
+
+select:disabled {
+  background-color: rgb(57 62 70 / 0.5);
 }
 
 .group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  border-width: 4px;
+  border-color: rgb(57 62 70 / 0.5);
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 231 213 / var(--tw-bg-opacity));
+  padding: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(57 62 70 / var(--tw-text-opacity));
 }
 
 .group label {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+#inputs button {
+  border-width: 4px;
+  border-color: rgb(57 62 70 / 0.5);
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 231 213 / var(--tw-bg-opacity));
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(57 62 70 / var(--tw-text-opacity));
 }
 
 *, ::before, ::after {
@@ -596,6 +634,10 @@ select {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .items-center {
   align-items: center;
 }
@@ -612,24 +654,19 @@ select {
   gap: 1.25rem;
 }
 
-.border-orange-900\/60 {
-  border-color: rgb(124 45 18 / 0.6);
+.bg-ygo-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(57 62 70 / var(--tw-bg-opacity));
 }
 
-.border-purple-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(126 34 206 / var(--tw-border-opacity));
+.bg-ygo-black\/60 {
+  background-color: rgb(57 62 70 / 0.6);
 }
 
-.border-sky-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(2 132 199 / var(--tw-border-opacity));
+.bg-ygo-black\/80 {
+  background-color: rgb(57 62 70 / 0.8);
 }
 
 .p-4 {
   padding: 1rem;
-}
-
-* {
-  border: 1px solid black;
 }
