@@ -1,8 +1,11 @@
 async function getYGOCardFromAPI(string) {
     try {
-        const response = await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?${string}`);
+        const response = await fetch(`https://db.ygoprodeck.com/
+        api/v7/cardinfo.php?${string}`);
         const jsonData = await response.json();
-        const card = jsonData.data[Math.floor(Math.random() * jsonData.data.length)];
+        const card = jsonData.data[
+            Math.floor(Math.random() * jsonData.data.length)
+        ];
         return card;
     } catch (error) {
         console.log(error);
@@ -16,13 +19,23 @@ async function displayYGOCard(inputs) {
     if (inputs.type.includes('monster')) {
         switch (inputs.type) {
             case 'monster':
-                string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
+                string = `level=${inputs.data[0]}&
+                type=${inputs.data[1]}&
+                race=${inputs.data[2]}&
+                attribute=${inputs.data[3]}`;
                 break;
             case 'monsterPendulum':
-                string = `level=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}&scale=${inputs.data[4]}`;
+                string = `level=${inputs.data[0]}&
+                type=${inputs.data[1]}&
+                race=${inputs.data[2]}&
+                attribute=${inputs.data[3]}&
+                scale=${inputs.data[4]}`;
                 break;
             case 'monsterLink':
-                string = `link=${inputs.data[0]}&type=${inputs.data[1]}&race=${inputs.data[2]}&attribute=${inputs.data[3]}`;
+                string = `link=${inputs.data[0]}&
+                type=${inputs.data[1]}&
+                race=${inputs.data[2]}&
+                attribute=${inputs.data[3]}`;
                 break;
             default:
                 break;
@@ -64,7 +77,17 @@ function generateMonsterCardDOM() {
 
     const monsterTypeSelect = document.createElement('select');
     monsterTypeSelect.id = 'monsterType';
-    const types = ['Effect Monster', 'Flip Effect Monster', 'Flip Tuner Effect Monster', 'Gemini Monster', 'Normal Monster', 'Normal Tuner Monster', 'Pendulum Effect Monster', 'Pendulum Flip Effect Monster', 'Pendulum Normal Monster', 'Pendulum Tuner Effect Monster', 'Ritual Effect Monster', 'Ritual Monster', 'Spirit Monster', 'Toon Monster', 'Tuner Monster', 'Union Effect Monster', "Fusion Monster", 'Link Monster', 'Pendulum Effect Fusion Monster', 'Synchro Monster', 'Synchro Pendulum Effect Monster', 'Synchro Tuner Monster', 'XYZ Monster', 'XYZ Pendulum Effect Monster'];
+    const types = ['Effect Monster', 'Flip Effect Monster',
+     'Flip Tuner Effect Monster', 'Gemini Monster', 'Normal Monster',
+      'Normal Tuner Monster', 'Pendulum Effect Monster',
+       'Pendulum Flip Effect Monster', 'Pendulum Normal Monster',
+        'Pendulum Tuner Effect Monster', 'Ritual Effect Monster',
+         'Ritual Monster', 'Spirit Monster', 'Toon Monster',
+          'Tuner Monster', 'Union Effect Monster', "Fusion Monster",
+           'Link Monster', 'Pendulum Effect Fusion Monster',
+            'Synchro Monster', 'Synchro Pendulum Effect Monster', 
+            'Synchro Tuner Monster', 'XYZ Monster', 
+            'XYZ Pendulum Effect Monster'];
     fillSelectWithArray(monsterTypeSelect, types);
 
 
@@ -87,28 +110,42 @@ function generateMonsterCardDOM() {
 
     const monsterRaceSelect = document.createElement('select');
     monsterRaceSelect.id = 'monsterRace';
-    const races = ['Aqua', 'Beast', 'Beast-Warrior', 'Creator-God', 'Cyberse', 'Dinosaur', 'Divine-Beast', 'Dragon', 'Fairy', 'Fiend', 'Fish', 'Insect', 'Machine', 'Plant', 'Psychic', 'Pyro', 'Reptile', 'Rock', 'Sea Serpent', 'Spellcaster', 'Thunder', 'Warrior', 'Winged Beast', 'Wyrm', 'Zombie'];
+    const races = ['Aqua', 'Beast', 'Beast-Warrior',
+    'Creator-God', 'Cyberse', 'Dinosaur', 'Divine-Beast',
+    'Dragon', 'Fairy', 'Fiend', 'Fish', 'Insect',
+    'Machine','Plant', 'Psychic', 'Pyro', 'Reptile', 'Rock', 'Sea Serpent',
+    'Spellcaster', 'Thunder', 'Warrior', 'Winged Beast', 'Wyrm', 'Zombie'];
     fillSelectWithArray(monsterRaceSelect, races);
     const monsterRaceDiv = wrapWithLabel(monsterRaceSelect, 'Race');
 
     const monsterAttributeSelect = document.createElement('select');
     monsterAttributeSelect.id = 'monsterAttribute';
-    const attributes = ['DARK', 'DIVINE', 'EARTH', 'FIRE', 'LIGHT', 'WATER', 'WIND'];
+    const attributes = ['DARK', 'DIVINE', 'EARTH',
+     'FIRE', 'LIGHT', 'WATER', 'WIND'];
     fillSelectWithArray(monsterAttributeSelect, attributes);
-    const monsterAttributeDiv = wrapWithLabel(monsterAttributeSelect, 'Attribute');
+    const monsterAttributeDiv = wrapWithLabel(
+        monsterAttributeSelect,
+        'Attribute'
+    );
 
 
     const monsterLinkRatingSelect = document.createElement('select');
     monsterLinkRatingSelect.id = 'monsterLinkRating';
     fillSelectWithLength(monsterLinkRatingSelect, 7, 1);
     monsterLinkRatingSelect.disabled = true;
-    const monsterLinkRatingDiv = wrapWithLabel(monsterLinkRatingSelect, 'Link Rating');
+    const monsterLinkRatingDiv = wrapWithLabel(
+        monsterLinkRatingSelect,
+        'Link Rating'
+    );
 
     const monsterPenScaleSelect = document.createElement('select');
     monsterPenScaleSelect.id = 'monsterPenScale';
     fillSelectWithLength(monsterPenScaleSelect, 14);
     monsterPenScaleSelect.disabled = true;
-    const monsterPenScaleDiv = wrapWithLabel(monsterPenScaleSelect, 'Pendulum Scale');
+    const monsterPenScaleDiv = wrapWithLabel(
+        monsterPenScaleSelect,
+        'Pendulum Scale'
+    );
 
     const getCardButton = document.createElement('button');
     getCardButton.textContent = 'Get Card';
@@ -117,11 +154,27 @@ function generateMonsterCardDOM() {
         cleanElementById('card');
         cleanElementById('description');
         if (monsterTypeSelect.value === 'Link Monster') {
-            displayYGOCard({type: 'monsterLink', data: [monsterLinkRatingSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]});
+            displayYGOCard({type: 'monsterLink', data: [
+                monsterLinkRatingSelect.value, 
+                monsterTypeSelect.value, 
+                monsterRaceSelect.value, 
+                monsterAttributeSelect.value
+            ]});
         } else if (monsterTypeSelect.value.includes('Pendulum')) {
-            displayYGOCard({type: 'monsterPendulum', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value, monsterPenScaleSelect.value]});
+            displayYGOCard({type: 'monsterPendulum', data: [
+                monsterLevelSelect.value, 
+                monsterTypeSelect.value, 
+                monsterRaceSelect.value, 
+                monsterAttributeSelect.value, 
+                monsterPenScaleSelect.value
+            ]});
         } else {
-            displayYGOCard({type: 'monster', data: [monsterLevelSelect.value, monsterTypeSelect.value, monsterRaceSelect.value, monsterAttributeSelect.value]})
+            displayYGOCard({type: 'monster', data: [
+                monsterLevelSelect.value, 
+                monsterTypeSelect.value, 
+                monsterRaceSelect.value,
+                monsterAttributeSelect.value
+            ]})
         }
     });
 
@@ -130,12 +183,15 @@ function generateMonsterCardDOM() {
     cleanElementById('description');
 
     const inputsDiv = document.getElementById('inputs');
-    inputsDiv.append(monsterTypeDiv, monsterRaceDiv, monsterAttributeDiv, monsterLevelDiv, monsterPenScaleDiv, monsterLinkRatingDiv, getCardButton);
+    inputsDiv.append(monsterTypeDiv, monsterRaceDiv,
+        monsterAttributeDiv, monsterLevelDiv,
+        monsterPenScaleDiv, monsterLinkRatingDiv, getCardButton);
 }
 
 function generateSpellCardDOM() {
     const spellRaceSelect = document.createElement('select');
-    const races = ['Normal', 'Continuous', 'Equip', 'Field', 'Quick-Play', 'Ritual'];
+    const races = ['Normal', 'Continuous', 'Equip',
+     'Field', 'Quick-Play', 'Ritual'];
     fillSelectWithArray(spellRaceSelect, races);
     const spellRaceDiv = wrapWithLabel(spellRaceSelect, 'Type')
 
